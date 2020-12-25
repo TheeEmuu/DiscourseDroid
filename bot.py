@@ -1,28 +1,22 @@
 from generator import newFighter
 import os
 import discord
+from discord.ext import commands
 from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 
-client = discord.Client()
+bot = commands.Bot(command_prefix='!')
 
-@client.event
-async def on_ready():
-    print(f'{client.user} is alive')
+@bot.command()
+async def fighter(ctx):
+    response = newFighter()
+    await ctx.send(response)
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-    
-    if message.content == "!fighter":
-        response = newFighter()
-        await message.channel.send(response)
-    elif message.content == "!battle":
-        a = newFighter()
-        b = newFighter()
-        await message.channel.send(a + " vs. " + b)
+@bot.command()
+async def battle(ctx):
+    response = newFighter() + " vs. " + newFighter()
+    await ctx.send(response)
 
-client.run(TOKEN)
+bot.run(TOKEN)

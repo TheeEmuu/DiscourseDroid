@@ -1,6 +1,6 @@
 from database import get
 
-def newFigher():
+def newFighter() -> str:
     battler = get("format")
 
     battler = battler.replace("#adjective#", get("adjective"))

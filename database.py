@@ -11,3 +11,11 @@ def get(toGet: str) -> str:
     cursor = conn.execute(sql)
     for row in cursor:
         return str(row[0])
+
+def addData(type, name):
+    conn = _connect()
+
+    sql = "INSERT INTO " + type + "VALUES(" + name + ")"
+    conn.execute(sql)
+
+    conn.commit()

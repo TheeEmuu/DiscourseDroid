@@ -1,5 +1,5 @@
 from generator import newFighter
-from database import addData
+from database import addData, removeData
 import os
 import discord
 from discord.ext import commands
@@ -41,5 +41,14 @@ async def add(ctx, type, name):
     else:
         ret = addData(type, name)
         await ctx.send(ret)
+
+@bot.command()
+async def remove(ctx, type, name):
+    if ctx.author.id not in approved_users:
+        await ctx.send("Not approved to use this command")
+    else:
+        ret = removeData(type, name)
+        await ctx.send(ret)
+
 
 bot.run(TOKEN)

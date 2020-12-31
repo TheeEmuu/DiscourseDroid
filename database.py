@@ -31,3 +31,14 @@ def addData(type, name):
     conn.commit()
 
     return name + " was added to " + type
+
+def removeData(type, name):
+    conn = _connect()
+
+    sql = "DELETE FROM " + type + " WHERE name=\"" + name + "\"" 
+
+    conn.execute(sql)
+
+    conn.commit()
+
+    return "No, Fuck you"

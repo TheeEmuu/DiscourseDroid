@@ -1,4 +1,7 @@
 import sqlite3
+from sqlite3.dbapi2 import IntegrityError
+
+from discord.ext.commands.errors import MissingRequiredArgument
 
 def _connect():
     conn = sqlite3.connect('pieces.db')
@@ -16,6 +19,15 @@ def addData(type, name):
     conn = _connect()
 
     sql = "INSERT INTO " + type + "(name) VALUES(\'" + name + "\')"
-    conn.execute(sql)
+    try:
+        conn.execute(sql)
+    except IntegrityError:
+        return name + " is already in " + type
+    except MissingRequiredArgument:
+        return "Missing one of the arguments"
+    except:
+        return "Failed for some reason"
+
+    return name + " was added to " + type
 
     conn.commit()

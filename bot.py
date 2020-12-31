@@ -39,7 +39,7 @@ async def add(ctx, type, name):
     if ctx.author.id not in approved_users:
         await ctx.send("Not approved to use this command")
     else:
-        addData(type, name)
-        await ctx.send(name + " was added to " + type)
+        ret = addData(type, name)
+        await ctx.send(ret)
 
 bot.run(TOKEN)

@@ -28,6 +28,6 @@ def addData(type, name):
     except:
         return "Failed for some reason"
 
-    return name + " was added to " + type
-
     conn.commit()
+
+    return name + " was added to " + type

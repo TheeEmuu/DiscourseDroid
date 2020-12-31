@@ -1,4 +1,5 @@
-from generator import newFighter, addData
+from generator import newFighter
+from database import addData
 import os
 import discord
 from discord.ext import commands
@@ -28,8 +29,8 @@ async def battle(ctx):
 @bot.command()
 async def ffa(ctx, num):
     response = '```'
-    for i in range(0, num):
-        response += newFighter()
+    for i in range(0, int(num)):
+        response += newFighter() + "\n"
     response += '```'
     await ctx.send(response)
 
@@ -39,5 +40,6 @@ async def add(ctx, type, name):
         await ctx.send("Not approved to use this command")
     else:
         addData(type, name)
+        await ctx.send(name + " was added to " + type)
 
 bot.run(TOKEN)

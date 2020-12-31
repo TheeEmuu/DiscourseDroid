@@ -15,7 +15,7 @@ def get(toGet: str) -> str:
 def addData(type, name):
     conn = _connect()
 
-    sql = "INSERT INTO " + type + "VALUES(" + name + ")"
+    sql = "INSERT INTO " + type + "(name) VALUES(\'" + name + "\')"
     conn.execute(sql)
 
     conn.commit()
